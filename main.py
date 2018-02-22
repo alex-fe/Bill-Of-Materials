@@ -1,45 +1,22 @@
-import requests
+import os
 
-from bs4 import BeautifulSoup
+from collections import namedtuple
 
+from .utils import Colors
 
-class Colors:
-    OKGREEN = '\033[92m'
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
+def read_list():
+    # path = raw_input('Enter path to BOM: ')
+    path = '/Users/alexfeldman/Documents/Scripts/BOM/tester.txt'
+    ext = os.path.splitext(path)[1]
+    if ext == '.txt':
+        with open(path, 'r') as text_file:
+            lines = text_file.readlines()
+        if len(lines):
+            print Colors.success('Read successfuly')
+    items = []
+    Item = namedtuple('Item', 'reference, quantity, value')
 
-    @classmethod
-    def success(cls, message):
-        print '{}{}{}'.format(cls.OKGREEN, message, cls.ENDC)
-
-    @classmethod
-    def warning(cls, message):
-        print '{}{}{}'.format(cls.WARNING, message, cls.ENDC)
-
-    @classmethod
-    def error(cls, message):
-        print '{}{}{}'.format(cls.FAIL, message, cls.ENDC)
-
-
-def get_site():
-    """
-    Get site from user and validate.
-    Returns:
-        Validated url.
-    """
-    while True:
-        site = raw_input('Enter url with BOM on page: ')
-        try:
-            request = requests.get(site)
-        except requests.exceptions.MissingSchema, err:
-            Colors.error(err)
-        else:
-            if request.status_code == 200:
-                break
-    Colors.success('Url validated')
-    return site
 
 
 if __name__ == '__main__':
-    site = get_site()
+    read_list()
