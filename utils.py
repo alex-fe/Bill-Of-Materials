@@ -1,3 +1,5 @@
+import pandas as pd
+
 class Colors:
     OKGREEN = '\033[92m'
     WARNING = '\033[93m'
@@ -15,3 +17,18 @@ class Colors:
     @classmethod
     def error(cls, message):
         print '{}{}{}'.format(cls.FAIL, message, cls.ENDC)
+
+class FormatterError(Error):
+    pass
+
+class Formatter(object):
+    """Convert file/file as string to DataFrame"""
+
+    columns = ('Location', 'Part', 'Quantity', 'Notes')
+    final_list = pd.DataFrame(columns=columns)
+
+    def __init__(self, file_=None, file_as_string=None):
+        if not (file_ or file_as_string):
+            raise FormatterError
+        if file_:
+            #TODO convert to file_as_string
