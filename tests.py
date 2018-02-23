@@ -34,6 +34,9 @@ class TestFormatter(unittest.TestCase):
         self.assertEquals(result, correct)
         self.assertIsInstance(result, str)
 
+    def test_create_frame(self):
+        result = Formatter.create_frame(self.string_as_list)
+
 
 if __name__ == '__main__':
     unittest.main()
