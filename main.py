@@ -2,7 +2,7 @@ import os
 
 from collections import namedtuple
 
-from .utils import Colors
+from utils import Colors, Formatter
 
 def read_list():
     # path = raw_input('Enter path to BOM: ')
@@ -12,7 +12,7 @@ def read_list():
         with open(path, 'r') as text_file:
             lines = text_file.readlines()
         if len(lines):
-            print Colors.success('Read successfuly')
+            print(Colors.success('Read successfuly'))
     items = []
     Item = namedtuple('Item', 'reference, quantity, value')
 
