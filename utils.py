@@ -44,14 +44,14 @@ class Formatter(object):
         return df
 
     @staticmethod
-    def remove_whitespace(string, join=False):
+    def to_list(string, as_string=False):
         #FIXME: too broad, needs to be more specific
         """Return file as long string without spaces or new lines."""
-        string = string.split(sep=None)
-        if join:
-            return ' '.join(string)
-        return string
+        string_list = string.split(sep=None)
+        if as_string:
+            return ' '.join(string_list)
+        return string_list
 
     def create_frame(self, file_as_string):
-        for list_item in self.remove_whitespace(file_as_string):
+        for list_item in self.to_list(file_as_string):
             print(list_item)
